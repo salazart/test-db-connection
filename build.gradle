@@ -1,0 +1,22 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+
+jar {
+    manifest {
+        attributes "Main-Class": "com.sz.tdc.TestConnection"
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    baseName = 'test-db-connection'
+}
+
+
+dependencies {
+    compile files('src/main/resources/libs/ojdbc5-11.2.0.1.0.jar')
+}
+
+repositories {
+    jcenter()
+}
